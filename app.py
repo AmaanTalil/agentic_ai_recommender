@@ -125,23 +125,24 @@ else:
     qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
 
     st.session_state.recommendation_result = qa_chain.run(query = f"""
-You are a professional agentic AI systems consultant.
+You are an expert AI systems consultant specializing in agentic AI toolchains.
 
-Your only source of knowledge is the following research document on agentic AI tools and frameworks, which has already been provided to you in context:
+Use only the research content already provided to you (agentic_ai_research.pdf). Based on the user’s requirements described below, recommend specific AI tools by name.
 
-- agentic_ai_research.pdf
+For each tool you recommend:
+- Mention the tool’s name
+- Briefly state its type or category (e.g., planner, memory module, orchestration tool)
+- Explain **why** this tool is suitable for the user's context
 
-Below is a detailed description of a user’s goals and requirements. Based only on this document and nothing else, generate a clear, beginner-friendly recommendation that maps the user’s needs to specific agentic AI tools, frameworks, memory components, LLM models, orchestration layers, or planning modules.
+After listing the tools, provide a concise **workflow architecture** showing how these tools would interact or be integrated to form a functional agentic AI system.
 
-Also describe the directional **workflow architecture** — explain how these tools will be connected or used in sequence to build a functioning agent.
+The output should:
+- Be grounded only in the provided research document
+- Be clear and structured
+- Avoid generic or template headings
+- Adapt to the user's actual needs — only include tools that are relevant to their scenario
 
-The explanation should:
-- Be written so that both technical and non-technical readers can understand it
-- Highlight **why** each tool fits their context
-- Be structured with clear headings like: `LLM Model`, `Memory Tool`, `Planning Tool`, `Workflow Flow`, etc.
-- Avoid external information not present in the provided document
-
-Here is the user’s profile context:
+Here is the user's context:
 
 {profile}
 """)
